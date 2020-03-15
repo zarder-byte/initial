@@ -16,5 +16,6 @@ Route::get('/', function () {
 });
 
 //https://learnku.com/docs/laravel/6.x/routing/5135#basic-routing
-Route::get('/gbook/index', 'MsgController@index');
-Route::post('/gbook/save', 'MsgController@save');
+Route::get('/gbook/index', 'MsgController@index')->name('index');
+Route::post('/gbook/save', 'MsgController@save')->name('save');
+
