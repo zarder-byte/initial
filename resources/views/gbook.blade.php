@@ -1,5 +1,14 @@
 @extends('layouts.app')
+<style>
+    html {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+}
 
+</style>
 @section('content')
 <div class="container">
     <div class="jumbotron">
