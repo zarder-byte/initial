@@ -26,7 +26,7 @@
         <div class="form-group row">
             <label for="username" class="col-2 col-form-label">password</label>
             <div class="col-10">
-                <input type="text" name="password" class="form-control" id="password" placeholder="请输入用户名" >
+                <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码" >
                 <small class="form-text text-muted">
                     @error('password')
                         <div class="alert alert-danger">{{$message}}</div>

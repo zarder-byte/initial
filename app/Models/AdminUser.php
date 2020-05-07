@@ -13,4 +13,11 @@ class AdminUser extends Authenticatable
     protected $fillable = ['username','password','state'];
     const NORMAL = 1;   //正常，可登陆
     const BAN = 0;  //禁用，不可登陆
+
+    //状态获取器
+    public function getStateTextAttribute($value)
+    {
+        return config('project.admin.state')[$this->state];
+    }
+
 }

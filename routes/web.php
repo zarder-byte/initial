@@ -28,6 +28,22 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['adminLoginCheck'])->group(function(){
         //后台中心的首页
         Route::get('index','Admin\IndexController@index')->name('admin.index');
+
+        Route::prefix('adminuser')->group(function (){
+            //列表
+            Route::get('/','Admin\AdminUserController@index')->name('admin.adminuser');
+
+            //添加、编辑公用
+            Route::get('add/{adminuser?}','Admin\AdminUserController@add')->name('admin.adminuser.add');
+            Route::post('add/{adminuser?}','Admin\AdminUserController@save')->name('admin.adminuser.add');
+
+            //软删除
+            Route::get('remove/{adminuser}','Admin\AdminUserController@remove')->name('admin.adminuser.remove');
+
+            //切换状态
+            Route::get('state/{adminuser}','Admin\AdminUserController@state')->name('admin.adminuser.state');
+        });
+
     });
 
 
