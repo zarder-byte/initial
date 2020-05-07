@@ -18,7 +18,7 @@ class LoginController extends Controller
     //登陆校验
     public function check(AdminLogin $request){
         $data = $request->validated();
-        
+
         $is = Auth::guard('admin')->attempt($data);
         if(!$is){
             return back()->withErrors(['username'=>'账号不可用']);

@@ -19,7 +19,7 @@
             @include('admin.layouts.message')
             @yield('content')
         </div>
-    </div>   
+    </div>
 <script src="{{asset('static/js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{asset('static/js/popper.min.js')}}"></script>
 <script src="{{asset('static/js/bootstrap.min.js')}}"></script>
