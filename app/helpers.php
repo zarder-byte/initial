@@ -11,3 +11,14 @@
  function alert($msg, $type='success'){
      session()->flash($type,$msg);
  }
+
+
+ /**
+  *系统设置
+  *获取key，返回value
+  */
+
+  function setting($key){
+    $data = app('app\Models\Setting')->kv();
+    return $data[$key];
+  }
