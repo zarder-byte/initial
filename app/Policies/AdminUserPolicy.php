@@ -43,6 +43,12 @@ class AdminUserPolicy
         return true;
     }
 
+    public function test(AdminUser $adminuser,$targetAdminUser){
+        if($targetAdminUser->id > 1){
+            return Response::deny("测试authorize");
+        }
+        return true;
+    }
 
 
 }
