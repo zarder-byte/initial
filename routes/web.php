@@ -44,13 +44,25 @@ Route::prefix('admin')->group(function () {
             Route::get('state/{adminuser}','Admin\AdminUserController@state')->name('admin.adminuser.state');
         });
 
+        //系统设置
+        Route::prefix('setting')->group(function (){
+            Route::get('/','Admin\SettingController@index')->name('admin.setting');
+            Route::post('/','Admin\SettingController@save')->name('admin.setting');
+        });
+
+        //资源管理模块
+        Route::prefix('resource')->group(function (){
+            //资源列表页
+            Route::get('/','Admin\ResourceController@index')->name('admin.resource');
+            //资源添加页
+            Route::get('add/{resource?}','Admin\ResourceController@add')->name('admin.resource.add');
+            //添加的业务逻辑处理
+            Route::post('add/{resource?}','Admin\ResourceController@save')->name('admin.resource.add');
+            //资源的删除页
+            Route::get('remove/{resource}','Admin\ResourceController@remove')->name('admin.resource.remove');
+            //资源上传
+            Route::post('up','Admin\ResourceController@up')->name('admin.resource.up');
+        });
+
     });
-
-
-    //系统设置
-    Route::prefix('setting')->group(function (){
-        Route::get('/','Admin\SettingController@index')->name('admin.setting');
-        Route::post('/','Admin\SettingController@save')->name('admin.setting');
-    });
-
 });

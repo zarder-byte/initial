@@ -19,6 +19,6 @@
   */
 
   function setting($key){
-    $data = app('app\Models\Setting')->kv();
+    $data = app('App\Models\Setting')->kv();
     return $data[$key];
   }
