@@ -19,9 +19,22 @@ class Resource extends Model
         return config('project.resource.type')[$this->type];
     }
 
+    //一对多(反向)
     public function adminuser()
     {
         return $this->belongsTo('App\Models\AdminUser');
+    }
+
+    //一对一关联到视频子表
+    public function video()
+    {
+        return $this->hasOne('App\Models\ResourceVideo');
+    }
+
+    //一对一关联到文档子表
+    public function doc()
+    {
+        return $this->hasOne('App\Models\ResourceDoc');
     }
 
 }
