@@ -43,13 +43,15 @@ class ResourceController extends Controller
     //添加，编辑
     public function add(Request $request,Resource $resource){
         $data = [];
-        $type = $request->input('type',null);
+        //$type = $request->input('type',null);
+        $type = $resource->id ? $resource->type : $request->input('type');
         if(!$type){
             alert('请指定资源类型','danger');
             return redirect()->route('admin.resource');
         }
         $data = [
             'type' => $type,
+            'resource' => $resource,
         ];
         return view('admin.resource.add',$data);
     }
@@ -57,7 +59,6 @@ class ResourceController extends Controller
     public function save(ResourceWrite $request,Resource $resource){
         $data= $request->validated();
         $data['adminuser_id'] = Auth::guard('admin')->id();
-
         DB::transaction(function()use($resource,$data){
             //根据资源类型,动态指定关联方法
             switch($data['type']){
@@ -70,7 +71,12 @@ class ResourceController extends Controller
                 default:
                 alert('403','无效的type类型');
             }
-            $resource->create($data)->{$relation}()->create($data);
+            if($resource->id){
+                $resource->update($data);
+                $resource->{$relation}->update($data);
+            }else{
+                $resource->create($data)->{$relation}()->create($data);
+            }
         });
         alert('操作成功');
         return redirect()->route('admin.resource');

@@ -69,7 +69,7 @@
     <th scope="row">{{$resource->title}}</th>
     <th scope="row">{{$resource->created_at}}</th>
     <th scope="row">
-        <a href="#" class="btn btn-sm btn-secondary">修改</a>
+        <a href="{{route('admin.resource.add',[$resource->id])}}" class="btn btn-sm btn-secondary">修改</a>
         <a href="#" onclick="return confirm('确认删除吗？')" class="btn btn-sm btn-danger">删除</a>
     </th>
     </tr>
