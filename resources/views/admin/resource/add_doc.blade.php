@@ -19,7 +19,13 @@
 <script>
     $(document).ready(function(){
         var editor = new Simditor({
-            textarea : $('#content')
+            textarea : $('#content'),
+            upload:{
+            url: '{{route("admin.resource.up")}}',
+            params:  {_token:'{{ csrf_token() }}'},
+            fileKey: 'image_file',
+            },
+            pasteImage:true,
         });
     });
 </script>

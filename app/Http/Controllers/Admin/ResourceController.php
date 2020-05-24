@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceWrite;
+use App\Models\File;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,7 +87,44 @@ class ResourceController extends Controller
 
     }
 
-    public function up(){
+    public function up(Request $request,File $fileModel){
+        $result = [
+            'success' => false,
+            'msg' => '尚未实现上传功能',
+            'file_path' => '',
+            //'ext' => $request->file('image_file')->extension(),
+        ];
 
+        //检查是否上传了文件
+        if(!$request->hasFile('image_file')){
+            $result['msg'] = '未选择文件';
+            return response()->json($result);
+        }
+
+        //获取上传文件对象
+        $file = $request->file('image_file');
+
+        //检查文件有效性
+        if(!$file->isValid()){
+            $result['msg'] = $file->getErrorMessage();
+            return response()->json($result);
+        }
+
+        //检查文件类型
+        if( !in_array( $file->extension(), config('project.upload.image') ) ){
+            $result['msg'] = '不被允许的文件类型';
+            return response()->json($result);
+        }
+
+        $file_path = $file->store('doc','public');
+
+        //插入数据库
+        $fileModel = $fileModel->saveFile('doc_editor',$file_path,$file);
+
+        //通之编辑器上传成功
+        $result['success'] = true;
+        $result['file_path'] = $fileModel->FileLink;
+
+        return $result;
     }
 }
