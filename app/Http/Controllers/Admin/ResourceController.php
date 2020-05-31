@@ -83,8 +83,11 @@ class ResourceController extends Controller
         return redirect()->route('admin.resource');
     }
 
-    public function remove(){
-
+    public function remove(Resource $resource){
+        //资源如果被使用情况下，则禁止删除(待添加功能)
+        $resource->delete();
+        alert('操作成功');
+        return back();
     }
 
     public function up(Request $request,File $fileModel){
