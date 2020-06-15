@@ -11,8 +11,11 @@ use Illuminate\Http\Request;
 class CourseController extends Controller
 {
     //课程列表
-    public function index(Request $request){
-        $data = [];
+    public function index(Request $request,Course $course){
+        $courses = $course->orderby('sort','asc')->get();
+        $data = [
+            'courses' => $courses,
+        ];
         return view('admin.course.index',$data);
     }
 
@@ -34,7 +37,11 @@ class CourseController extends Controller
     }
 
     //课程移除
-    public function remove(Request $request,Course $course){}
+    public function remove(Request $request,Course $course){
+        $course->delete();
+        alert('操作成功');
+        return back();
+    }
 
     //章节添加编辑
     public function chapterAdd(Request $request, Course $course, Chapter $chapter){
