@@ -33,7 +33,7 @@
                     <td>
                         <img src='{{$course->image_link}}' class='img-fluid' />
                     </td>
-                    <td>{{$course->tetle}}</td>
+                    <td>{{$course->title}}</td>
                     <td>{{$course->sort}}</td>
                     <td>{{$course->created_at}}</td>
                     <td>{{$course->updated_at}}</td>
