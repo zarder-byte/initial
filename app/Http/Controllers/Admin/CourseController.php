@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChapterWrite;
 use App\Http\Requests\CourseWrite;
 use App\Models\Chapter;
 use App\Models\Course;
@@ -77,12 +78,25 @@ class CourseController extends Controller
 
     //章节添加编辑
     public function chapterAdd(Request $request, Course $course, Chapter $chapter){
-        $data = [];
+        $data = [
+            'course' => $course,
+            'chapter' => $chapter,
+        ];
         return view('admin.course.chapter_add',$data);
     }
 
     //章节保存
-    public function chatperSave(ChapterAdd $request, Course $course, Chapter $chapter){}
+    public function chapterSave(ChapterWrite $request, Course $course, Chapter $chapter){
+        $data = $request->validated();
+        $data['course_id'] = $course->id;
+        if($chapter->id){
+            $chapter->update($data);
+        }else{
+            $chapter->create($data);
+        }
+        alert('操作成功');
+        return redirect()->route('admin.course.detail', [$course->id]);
+    }
 
     //章节移除
     public function chapterRemove(Request $request,Course $course, Chapter $chapter){}
