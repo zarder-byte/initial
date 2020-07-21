@@ -22,8 +22,9 @@ class CourseController extends Controller
     }
 
     //课程详情-详细页-展示课程的章节列表
-    public function detail(Request $request,Course $course){
+    public function detail(Request $request,Course $course,Chapter $chapter){
         $data = [
+            'chapter' => $chapter,
             'course' => $course,
         ];
         return view('admin.course.detail',$data);
@@ -99,7 +100,13 @@ class CourseController extends Controller
     }
 
     //章节移除
-    public function chapterRemove(Request $request,Course $course, Chapter $chapter){}
+    public function chapterRemove(Request $request,Course $course, Chapter $chapter){
+        //待完成：检查是否有资源，有则不允许删除
+
+        $chapter->delete();
+        alert('操作成功');
+        return redirect()->route('admin.course.detail', [$course->id]);
+    }
 
     //资源关联
     public function resourceAdd(Request $request,Course $course,Chapter $chapter){
