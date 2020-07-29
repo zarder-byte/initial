@@ -18,4 +18,12 @@ class Chapter extends Model
         return $this->belongsTo('App\Models\course');
     }
     */
+
+    public function resource(){
+        //多对多关联
+        return $this->belongsToMany('App\Models\Resource','chapter_resources')
+        ->orderBy('sort','asc')
+        ->withPivot('sort')   //从中间表中获取额外的字段
+        ->withTimestamps();//
+    }
 }
