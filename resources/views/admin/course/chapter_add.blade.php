@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('title')
-管理员管理
+章节添加 - {{$course->title}}
 @endsection
 
 @section('sidebar')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-@page_title(['title'=>'课程添加','conment'=>'管理你的课程'])
+@page_title(['title'=>'章节添加','conment'=>'管理你的章节'])
 
 @endpage_title()
 

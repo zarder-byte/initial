@@ -72,6 +72,11 @@ class CourseController extends Controller
 
     //课程移除
     public function remove(Request $request,Course $course){
+        //判断课程下面是否有正在使用的章节,如果有则禁止删除
+        if($course->chapter()->count()>0){
+            alert('删除失败，请先删除旗下章节','danger');
+            return back();
+        }
         $course->delete();
         alert('操作成功');
         return back();
@@ -102,7 +107,10 @@ class CourseController extends Controller
     //章节移除
     public function chapterRemove(Request $request,Course $course, Chapter $chapter){
         //待完成：检查是否有资源，有则不允许删除
-
+        if($chapter->resource()->count()>0){
+            alert('删除失败，请先删除章节下的资源','danger');
+            return back();
+        }
         $chapter->delete();
         alert('操作成功');
         return redirect()->route('admin.course.detail', [$course->id]);

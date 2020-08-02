@@ -85,6 +85,10 @@ class ResourceController extends Controller
 
     public function remove(Resource $resource){
         //资源如果被使用情况下，则禁止删除(待添加功能)
+        if($resource->chapter()->count()>0){
+            alert('删除失败，请先删除关联的章节','danger');
+            return back();
+        }
         $resource->delete();
         alert('操作成功');
         return back();
