@@ -30,8 +30,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        //约束参数的可用值范围来避免错误
+        Route::pattern('course','[0-9]+');
+        Route::pattern('chapter','[0-9]+');
+        Route::pattern('resource','[0-9]+');
         parent::boot();
     }
 

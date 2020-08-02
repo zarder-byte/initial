@@ -10,4 +10,19 @@ class Course extends Model
     //
     use SoftDeletes;
     protected $fillable = ['adminuser_id','title','desc','sort','image'];
+
+    //图片获取器
+    function getImageLinkAttribute(){
+        if(empty($this->image)){
+            return asset('static/images/course-default.jpg');
+        }
+        return asset("storage/".$this->image);
+    }
+
+    public function chapter()
+    {
+        return $this->hasMany('App\Models\Chapter')->orderBy('sort','asc');
+    }
+
+
 }

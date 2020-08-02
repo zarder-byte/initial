@@ -37,4 +37,13 @@ class Resource extends Model
         return $this->hasOne('App\Models\ResourceDoc');
     }
 
+    //多对多
+    public function chapter(){
+        return $this->belongsToMany('App\Models\Chapter', 'chapter_resources')
+            ->orderBy('sort','asc')
+            ->withPivot('sort')
+            ->withTimestamps();
+    }
+
+
 }
