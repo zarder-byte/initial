@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('index.layouts.app')
 
 @section('title')
-登陆
+首页
 @endsection
 
 @section('content')
