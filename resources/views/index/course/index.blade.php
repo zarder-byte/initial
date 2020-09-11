@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-12">
-        @foreach($course->chapter as $chapter)
+        @foreach($course->chapter()->with('resource')->get() as $chapter)
         <div class="row mt-2 mb-3">
             <div class='col-12'>
                 <div class='d-flex mb-2'>
@@ -33,7 +33,7 @@
                 <div class="list-group"><!--list-group-item 列表组 -action 鼠标悬停显示灰色背景 -->
                     <div class="list-group-item list-group-item-action  d-flex">
                         {!!$resource->typeName!!}&nbsp;&nbsp;-&nbsp;&nbsp;
-                            <a href="#" title="{{$resource->desc}}">
+                            <a href="{{route('course.resource',[$course->id,$resource->id])}}" title="{{$resource->desc}}">
                                 {{$resource->title}}
                             </a> <!-- ml-auto 元素居右 mr-auto 元素居左 -->
                     <span class="ml-auto text-muted text-sm">{{$resource->updated_at}}</span>
