@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'Index\IndexController@index')->name('index');
+Route::prefix('course')->group(function(){
+    //课程专题页
+    Route::get('/{course}','Index\CourseController@index')->name('course.index');
+    Route::get('/{course}/{resource}','Index\CourseController@resource')->name('course.resource');
 });
+
 
 //后台路由分组
 Route::prefix('admin')->group(function () {
