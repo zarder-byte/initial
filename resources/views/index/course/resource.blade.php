@@ -24,11 +24,11 @@
     </p>
 
         @if($resource->type==\App\Models\Resource::VIDEO)
-            123
+        @include("index.course.video")
         @endif
 
         @if($resource->type==\App\Models\Resource::DOC)
-            456
+        @include("index.course.doc")
         @endif
     </div>
 </div>
